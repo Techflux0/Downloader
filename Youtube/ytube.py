@@ -5,10 +5,10 @@ def download_playlist():
     while True:
         playlist_link = input("Enter the playlist link (or type 'exit' to quit): ")
         if playlist_link.lower() == 'exit':
-            break  # Exit the loop if the user types 'exit'
+            break  
 
         try:
-            # Attempt to download the playlist
+          
             download_single_playlist(playlist_link)
         except Exception as e:
             print(f"Error: {e}")
@@ -42,6 +42,9 @@ def download_single_playlist(playlist_link):
 
     ydl_opts = {
         'outtmpl': os.path.join(playlist_directory, '%(title)s.%(ext)s'),
+        'format': 'bestvideo+bestaudio/best',
+        'merge_output_format': 'mp4',
+        'progress_hooks': [progress_hook],
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -49,5 +52,5 @@ def download_single_playlist(playlist_link):
 
     print(f"Playlist '{playlist_title}' downloaded and merged successfully.")
 
-# Start the downloading process
+
 download_playlist()
