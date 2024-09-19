@@ -3,7 +3,7 @@ import yt_dlp
 
 def download_playlist():
     while True:
-        playlist_link = input("Enter the playlist link (or type 'exit' to quit): ")
+        playlist_link = input("Enter the playlist link or Video Link(or type 'exit' to quit): ")
         if playlist_link.lower() == 'exit':
             break  
 
@@ -51,6 +51,4 @@ def download_single_playlist(playlist_link):
         ydl.download([playlist_link])
 
     print(f"Playlist '{playlist_title}' downloaded and merged successfully.")
-
-
 download_playlist()
