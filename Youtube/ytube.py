@@ -3,12 +3,11 @@ import yt_dlp
 
 def download_playlist():
     while True:
-        playlist_link = input("Enter the playlist link or Video Link(or type 'exit' to quit): ")
+        playlist_link = input("Enter the playlist link or Video Link (or type 'exit' to quit): ")
         if playlist_link.lower() == 'exit':
             break  
 
         try:
-          
             download_single_playlist(playlist_link)
         except Exception as e:
             print(f"Error: {e}")
@@ -40,9 +39,30 @@ def download_single_playlist(playlist_link):
     playlist_directory = os.path.join(downloads_directory, safe_playlist_title)
     os.makedirs(playlist_directory, exist_ok=True)
 
+    # Fetch video formats
+    with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
+        info_dict = ydl.extract_info(playlist_link, download=False)
+        formats = info_dict.get('formats', [])
+    
+    # Display available resolutions
+    print("Available formats:")
+    available_resolutions = {}
+    for idx, fmt in enumerate(formats):
+        resolution = fmt.get('height', 'audio')  # Use 'audio' for audio-only formats
+        available_resolutions[idx + 1] = fmt
+        print(f"{idx + 1}: {fmt['format_id']} - {resolution}p")
+
+    # Ask user to choose a resolution
+    choice = int(input("Choose a resolution (number): "))
+    selected_format = available_resolutions.get(choice)
+
+    if not selected_format:
+        print("Invalid choice, using default format.")
+        selected_format = formats[0]  # Use the first available format if invalid choice
+
     ydl_opts = {
         'outtmpl': os.path.join(playlist_directory, '%(title)s.%(ext)s'),
-        'format': 'bestvideo+bestaudio/best',
+        'format': selected_format['format_id'],  # Use the selected format
         'merge_output_format': 'mp4',
         'progress_hooks': [progress_hook],
     }
@@ -51,4 +71,5 @@ def download_single_playlist(playlist_link):
         ydl.download([playlist_link])
 
     print(f"Playlist '{playlist_title}' downloaded and merged successfully.")
+
 download_playlist()
