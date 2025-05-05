@@ -5,28 +5,12 @@ command_exists() {
 }
 
 
-# function print_banner() {
-#     clear
-#     echo -e "${blue}##################################################\n"
-#     echo -e "${blue}##                                              ##\n"
-#     echo -e "${blue}##  88      a8P         db        88        88  ##\n"
-#     echo -e "${blue}##  88    .88'         d88b       88        88  ##\n"
-#     echo -e "${blue}##  88   88'          d8''8b      88        88  ##\n"
-#     echo -e "${blue}##  88 d88           d8'  '8b     88        88  ##\n"
-#     echo -e "${blue}##  8888'88.        d8YaaaaY8b    88        88  ##\n"
-#     echo -e "${blue}##  88P   Y8b      d8''''''''8b   88        88  ##\n"
-#     echo -e "${blue}##  88     '88.   d8'        '8b  88        88  ##\n"
-#     echo -e "${blue}##  88       Y8b d8'          '8b 888888888 88  ##\n"
-#     echo -e "${blue}##                                              ##\n"
-#     echo -e "${blue}####  ############# NetHunter ####################${reset}\n\n"
-# }
 
 
-
-if ! command_exists figlet; then
-    echo "figlet is not installed. Installing..."
-    sudo apt-get install -y figlet
-fi
+# if ! command_exists figlet; then
+#     echo "figlet is not installed. Installing..."
+#     sudo apt-get install -y figlet
+# fi
 
 # Check if Python is installed
 if ! command_exists python3; then
