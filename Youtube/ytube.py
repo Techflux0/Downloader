@@ -3,16 +3,15 @@ import yt_dlp
 
 def download_playlist():
     while True:
-        playlist_link = input("Enter the playlist link or Video Link(or type 'exit' to quit): ")
+        playlist_link = input("Enter the playlist link or Video Link (or type 'exit' to quit): ")
         if playlist_link.lower() == 'exit':
-            break  
+            break
 
         try:
-          
             download_single_playlist(playlist_link)
         except Exception as e:
             print(f"Error: {e}")
-            print("Please enter a valid playlist URL.")
+            print("Please enter a valid playlist or video URL.")
 
 def download_single_playlist(playlist_link):
     def progress_hook(d):
@@ -40,15 +39,17 @@ def download_single_playlist(playlist_link):
     playlist_directory = os.path.join(downloads_directory, safe_playlist_title)
     os.makedirs(playlist_directory, exist_ok=True)
 
+    # yt-dlp options for best quality
     ydl_opts = {
         'outtmpl': os.path.join(playlist_directory, '%(title)s.%(ext)s'),
-        'format': 'bestvideo+bestaudio/best',
-        'merge_output_format': 'mp4',
+        'format': 'bestvideo+bestaudio/best',  # Download the best video and audio available
+        'merge_output_format': 'mp4',  # Merge into MP4 format
         'progress_hooks': [progress_hook],
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([playlist_link])
 
-    print(f"Playlist '{playlist_title}' downloaded and merged successfully.")
+    print(f"Playlist or video '{playlist_title}' downloaded successfully in the best available resolution.")
+
 download_playlist()

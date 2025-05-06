@@ -5,7 +5,7 @@ command_exists() {
 }
 
 
-
+#Linux
 
 # if ! command_exists figlet; then
 #     echo "figlet is not installed. Installing..."

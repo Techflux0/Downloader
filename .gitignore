@@ -1,0 +1,14 @@
+#ignore this files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swm
+*.swp
+*.swo
+*.swn
+
+#ignore this folders
+node_modules
+dist
