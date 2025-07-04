@@ -9,7 +9,7 @@ CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
-# Function to add to PATH if not already present
+
 add_to_path() {
     local dir="$1"
     if [[ ":$PATH:" != *":$dir:"* ]]; then
@@ -78,7 +78,7 @@ check_deps() {
     echo -e "${GREEN}All dependencies verified!${NC}"
 }
 
-# Enhanced progress bar with ETA estimation
+
 progress_bar() {
     local duration=${1:-10}
     local width=${2:-50}
