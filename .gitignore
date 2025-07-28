@@ -8,7 +8,7 @@
 *.swp
 *.swo
 *.swn
-
+*.asm
 #ignore this folders
 node_modules
 dist
